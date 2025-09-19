@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAS Media</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      background: rgba(0,0,0,0.3);
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    nav button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav button.active {
+      background: rgba(255,255,255,0.2);
+      border-radius: 5px;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4);
+      border-radius: 20px;
+      margin: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      overflow: auto;
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      font-size: 0.9em;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <header>🎵🎥 Welcome to MAS Media 🎥🎵</header>
+  <nav>
+    <button onclick="showPage('home')" class="active">Home</button>
+    <button onclick="showPage('music')">Music</button>
+    <button onclick="showPage('videos')">Videos</button>
+    <button onclick="showPage('downloads')">Downloads</button>
+    <button onclick="showPage('private')">Private</button>
+  </nav>
+  <main>
+    <div id="home" class="page active">
+      <h2>🌟 Home</h2>
+      <p>Welcome to <b>MAS Media</b> — your music & video world.</p>
+      <button class="btn">Explore Music</button>
+      <button class="btn">Explore Videos</button>
+    </div>
+    <div id="music" class="page">
+      <h2>🎶 Music</h2>
+      <p>Play your favorite songs here.</p>
+      <audio controls>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div id="videos" class="page">
+      <h2>🎬 Videos</h2>
+      <p>Enjoy amazing videos here.</p>
+      <video controls width="100%">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+    </div>
+    <div id="downloads" class="page">
+      <h2>⬇ Downloads</h2>
+      <p>Feature coming soon: download music & videos directly.</p>
+    </div>
+    <div id="private" class="page">
+      <h2>🔒 Private Folder</h2>
+      <p>Secure your files with a PIN.</p>
+      <button class="btn" onclick="setPin()">Set PIN</button>
+      <button class="btn" onclick="unlockPrivate()">Unlock</button>
+    </div>
+  </main>
+  <footer>© MAS Square — Powered by MAS Media</footer>
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    let pin = null;
+    function setPin() {
+      pin = prompt("Enter a new 4-digit PIN:");
+      alert("PIN set successfully!");
+    }
+    function unlockPrivate() {
+      let entered = prompt("Enter your PIN:");
+      if (entered === pin) {
+        alert("Private folder unlocked ✅");
+      } else {
+        alert("Incorrect PIN ❌");
+      }
+    }
+  </script>
+</body>
+</html>
